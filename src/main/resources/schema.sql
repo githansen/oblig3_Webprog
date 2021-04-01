@@ -5,5 +5,6 @@ CREATE TABLE Billett (
     Etternavn VARCHAR(255) NOT NULL,
     Telefonnr INTEGER(255) NOT NULL,
     Epost VARCHAR NOT NULL,
+    Antall Integer NOT NULL,
     PRIMARY KEY (id)
 );

@@ -1,6 +1,6 @@
 package oblig3.oblig3;
 
-public class Billett {
+public class Billett implements Comparable<Billett>{
     private int antall;
     private String film;
     private String fornavn;
@@ -66,5 +66,10 @@ public class Billett {
 
     public void setEpost(String epost) {
         this.epost = epost;
+    }
+
+    @Override
+    public int compareTo(Billett o) {
+        return getEtternavn().compareTo(o.getEtternavn());
     }
 }

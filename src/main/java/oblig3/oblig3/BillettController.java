@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 @RestController
 public class BillettController {
@@ -17,14 +18,15 @@ public class BillettController {
 
     @PostMapping ("/Lagre")
     public void Lagrebillett (Billett nyBillett) {
-        String sql = "INSERT INTO Billett (Film, Fornavn, Etternavn, Telefonnr, Epost) Values(?,?,?,?,?)";
-        db.update(sql, nyBillett.getFilm(),nyBillett.getFornavn(),nyBillett.getEtternavn(),nyBillett.getTelefonnr(),nyBillett.getEpost());
+        String sql = "INSERT INTO Billett (Film, Fornavn, Etternavn, Telefonnr, Epost, Antall) Values(?,?,?,?,?,?)";
+        db.update(sql, nyBillett.getFilm(),nyBillett.getFornavn(),nyBillett.getEtternavn(),nyBillett.getTelefonnr(),nyBillett.getEpost(),nyBillett.getAntall());
 
     }
     @GetMapping("/HentBilletter")
     public List <Billett> hent(){
         String sql = "SELECT * FROM Billett";
         List<Billett> alleBilletter = db.query(sql,new BeanPropertyRowMapper(Billett.class));
+        Collections.sort(alleBilletter,Billett::compareTo);
         return alleBilletter;
     }
 
